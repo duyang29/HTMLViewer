@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/defualt_editeview_height"
+        android:background="@drawable/editeview_style">
+
+        <ImageView
+            android:id="@+id/reset_editView_icon_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp" />
+
+        <EditText
+            android:id="@+id/reset_editView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/reset_editView_close_iv"
+            android:layout_toRightOf="@+id/reset_editView_icon_iv"
+            android:background="@android:color/transparent"
+            android:hint="请输入"
+            android:singleLine="true"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/reset_editView_close_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:src="@mipmap/close_circle_icon"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/reset_line_textView"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:visibility="gone"
+        android:background="@color/line" />
+
+    <TextView
+        android:id="@+id/reset_line_focus_textView"
+        android:layout_width="match_parent"
+        android:layout_height="2dip"
+        android:background="@color/colorPrimary"
+        android:visibility="gone"/>
+
+
+</LinearLayout>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <com.example.htmlviewer.view.ResetEditView
+            android:id="@+id/activity_reset_password_old_editView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:edit_hint="输入原始密码"
+            app:edit_inputType="password"
+            app:edite_icon="@mipmap/login_mima" />
+
+        <com.example.htmlviewer.view.ResetEditView
+            android:id="@+id/activity_reset_password_new_editView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:edit_hint="输入新密码"
+            app:edit_inputType="password"
+            app:edite_icon="@mipmap/login_mima" />
+
+        <com.example.htmlviewer.view.ResetEditView
+            android:id="@+id/activity_reset_password_new_editView_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:edit_hint="重新输入新密码"
+            app:edit_inputType="password"
+            app:edite_icon="@mipmap/login_mima" />
+
+        <Button
+            android:id="@+id/btn_activity_modify_password_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/selector_btn_submit"
+            android:layout_gravity="right"
+            android:text="确定"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

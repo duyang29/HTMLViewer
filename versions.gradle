@@ -1,0 +1,121 @@
+ext.deps=[:]
+
+//build sdk versions
+def build_versions = [:]
+build_versions.min_sdk = 21
+build_versions.target_sdk = 27
+build_versions.compile_sdk = 27
+build_versions.build_tools = "27.0.2"
+ext.build_versions = build_versions
+
+//dependencies libs versions
+def versions=[:]
+versions.android_gradle_plugin = "3.1.0"
+versions.support = "26.1.0"
+versions.arch_core = "1.1.1"
+versions.lifecycle = "1.1.1"
+versions.room = "1.1.0"
+versions.retrofit="2.3.0"
+
+versions.butterknife= "8.8.1"
+versions.greendao='3.2.2'
+versions.glide="3.8.0"
+versions.leakcanary="1.5.1"
+
+versions.multidex='1.0.3'
+versions.constraint_layout = "1.1.0"
+
+versions.retrolambda= '3.2.5'
+versions.rxjava='1.1.6'
+versions.rxandroid='1.2.1'
+
+//3rd libs
+versions.ui_calendarview='1.4.0'
+
+versions.eventbus='3.1.1'
+versions.bugly="latest.release"
+versions.umeng="latest.integration"
+
+
+def deps=[:]
+
+deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
+
+def support = [:]
+support.annotations = "com.android.support:support-annotations:$versions.support"
+support.app_compat = "com.android.support:appcompat-v7:$versions.support"
+support.recyclerview = "com.android.support:recyclerview-v7:$versions.support"
+support.cardview = "com.android.support:cardview-v7:$versions.support"
+support.design = "com.android.support:design:$versions.support"
+support.v4 = "com.android.support:support-v4:$versions.support"
+support.preference="com.android.support:preference-v14:$versions.support"
+support.core_utils = "com.android.support:support-core-utils:$versions.support"
+deps.support = support
+
+def arch_core = [:]
+arch_core.testing = "android.arch.core:core-testing:$versions.arch_core"
+deps.arch_core = arch_core
+
+def lifecycle = [:]
+lifecycle.runtime = "android.arch.lifecycle:runtime:$versions.lifecycle"
+lifecycle.extensions = "android.arch.lifecycle:extensions:$versions.lifecycle"
+lifecycle.java8 = "android.arch.lifecycle:common-java8:$versions.lifecycle"
+lifecycle.compiler = "android.arch.lifecycle:compiler:$versions.lifecycle"
+deps.lifecycle = lifecycle
+
+def room = [:]
+room.runtime = "android.arch.persistence.room:runtime:$versions.room"
+room.compiler = "android.arch.persistence.room:compiler:$versions.room"
+room.rxjava2 = "android.arch.persistence.room:rxjava2:$versions.room"
+room.testing = "android.arch.persistence.room:testing:$versions.room"
+deps.room = room
+
+def retrofit = [:]
+retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+retrofit.gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+deps.retrofit=retrofit
+
+
+def butterknife = [:]
+butterknife.runtime="com.jakewharton:butterknife:$versions.butterknife"
+butterknife.compiler="com.jakewharton:butterknife-compiler:$versions.butterknife"
+deps.butterknife = butterknife
+
+def greendao = [:]
+greendao.runtime="org.greenrobot:greendao:$versions.greendao"
+greendao.greendao_gradle_plugin="org.greenrobot:greendao-gradle-plugin:$versions.greendao"
+deps.greendao = greendao
+
+def glide = [:]
+glide.runtime = "com.github.bumptech.glide:glide:$versions.glide"
+glide.compiler = "com.github.bumptech.glide:compiler:$versions.glide"
+deps.glide = glide
+
+def leakcanary = [:]
+leakcanary.debug="com.squareup.leakcanary:leakcanary-android:$versions.leakcanary"
+leakcanary.release="com.squareup.leakcanary:leakcanary-android-no-op:$versions.leakcanary"
+deps.leakcanary=leakcanary
+
+deps.multidex="com.android.support:multidex:$versions.multidex"
+deps.constraint_layout = "com.android.support.constraint:constraint-layout:$versions.constraint_layout"
+
+deps.retrolambda_version="me.tatarka:gradle-retrolambda:$versions.retrolambda"
+deps.rxjava = "io.reactivex:rxjava:$versions.rxjava"
+deps.rxandroid= "io.reactivex:rxandroid:$versions.rxandroid"
+
+deps.ui_calendarview="com.prolificinteractive:material-calendarview:$versions.ui_calendarview"
+
+deps.eventbus="org.greenrobot:eventbus:$versions.eventbus"
+deps.bugly="com.tencent.bugly:crashreport_upgrade:$versions.bugly"
+deps.umeng="com.umeng.analytics:analytics:$versions.umeng"
+
+
+ext.deps = deps
+
+def addRepos(RepositoryHandler handler) {
+    handler.jcenter(){url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+    handler.google()
+    handler.jcenter()
+    handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+}
+ext.addRepos = this.&addRepos

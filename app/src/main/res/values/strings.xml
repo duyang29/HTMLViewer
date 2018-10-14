@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">HTMLViewer</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <string name="splash_finish">立即开启</string>
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="forget_pwd">忘记密码</string>
+    <string name="login_shortcut">快捷登录</string>
+    <string name="login_phone">手机号</string>
+    <string name="login_wechat">微信</string>
+
+    <string name="nav_switch_theme">日/夜间模式</string>
+    <string name="nav_settings">设置</string>
+    <string name="nav_about">关于</string>
+
+    <string name="web_set">网页设置</string>
+    <string name="url_address">URL</string>
+    <string name="input_url_address">输入URL地址</string>
+    <string name="url_history">历史记录</string>
+    <string name="clear_url_history">清除记录</string>
+
+    <string name="system_set">系统设置</string>
+    <string name="modify_pwd">修改密码</string>
+
+</resources>

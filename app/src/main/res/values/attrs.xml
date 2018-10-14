@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--resetEditView样式-->
+    <declare-styleable name="ResetEditView">
+        <attr name="edite_icon" format="reference" />
+        <attr name="edit_hint" format="string" />
+        <attr name="edit_inputType" format="enum">
+            <enum name="password" value="0x10" />
+        </attr>
+    </declare-styleable>
+
+</resources>

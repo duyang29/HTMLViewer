@@ -1,0 +1,87 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion build_versions.compile_sdk
+    defaultConfig {
+        applicationId "com.example.htmlviewer"
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        vectorDrawables.useSupportLibrary = true
+
+        multiDexEnabled true
+    }
+
+    //support dataBinding
+    dataBinding {
+        enabled = true
+    }
+
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+    /*打包输出*/
+    applicationVariants.all {variant ->
+        variant.outputs.all {output ->
+            outputFileName = "HTMLViewer_${currentTime()}_V${defaultConfig.versionName}.apk"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+def currentTime(){
+    return new Date().format("yyyyMMdd")
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //Test
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    implementation deps.support.app_compat
+    implementation deps.support.preference
+    implementation deps.support.design
+    implementation deps.support.cardview
+    implementation deps.support.recyclerview
+
+    //Compile tools
+    implementation deps.constraint_layout
+    implementation deps.multidex
+
+    //Architecture components
+    implementation deps.lifecycle.runtime
+    implementation deps.lifecycle.extensions
+    annotationProcessor deps.lifecycle.compiler
+    implementation deps.room.runtime
+    annotationProcessor deps.room.compiler
+
+    /*依赖注入*/
+    implementation deps.butterknife.runtime
+    annotationProcessor deps.butterknife.compiler
+
+    /*EventBus*/
+    implementation deps.eventbus
+
+    implementation deps.retrofit.gson
+}

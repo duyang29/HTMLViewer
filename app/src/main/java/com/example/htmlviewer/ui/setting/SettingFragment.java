@@ -21,11 +21,15 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
+import android.text.InputType;
 import android.text.TextUtils;
+import android.text.method.PasswordTransformationMethod;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import com.example.htmlviewer.DataApplication;
 import com.example.htmlviewer.R;
@@ -49,6 +53,7 @@ public class SettingFragment extends PreferenceFragmentCompat {
 
     private Preference mURLPreference, mPWDModifyPreference,mClearPreference;
     private ListPreference mHistoryPreference;
+    private SwitchPreference mUnlockPreference;
 
     private SharedPreferences sp;
 
@@ -69,14 +74,61 @@ public class SettingFragment extends PreferenceFragmentCompat {
         sp = PreferenceManager.getDefaultSharedPreferences(DataApplication.getInstance());
 
         //默认路径
-        mDefaultUrl = sp.getString(ConstantSet.KEY_SET_URL, "http://");
-        if (!TextUtils.equals(mDefaultUrl, "")) {
+        mDefaultUrl = sp.getString(ConstantSet.KEY_SET_URL, "");
+        if (!TextUtils.isEmpty(mDefaultUrl)) {
             mURLPreference.setSummary(mDefaultUrl);
-            sp.edit().putString(ConstantSet.KEY_SET_URL, "http://").commit();
+//            sp.edit().putString(ConstantSet.KEY_SET_URL, "http://").commit();
         }
+
+        //默认锁定编辑
+        mUnlockPreference.setChecked(true);
+        mURLPreference.setVisible(false);
+        mPWDModifyPreference.setVisible(false);
+
+//        mURLPreference.setEnabled(false);
+//        mPWDModifyPreference.setEnabled(false);
 
         //输入历史
         loadHistory();
+
+        //解锁
+        mUnlockPreference.setOnPreferenceClickListener(preference -> {
+            if (!mUnlockPreference.isChecked()) {
+                //Unlock
+                EditText editText = new EditText(SettingFragment.this.getContext());
+                editText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                editText.setTransformationMethod(new PasswordTransformationMethod());//设置密码不可见
+                new AlertDialog.Builder(getActivity())
+                        .setTitle(R.string.tip_pwd_input)
+                        .setView(editText)
+                        .setPositiveButton(getString(R.string.dialog_confirm), (dialog, which) -> {
+                            if (TextUtils.isEmpty(editText.getText())) {
+                                ToastUtil.showToast(R.string.tip_pwd_empty);
+                                lockSetting(false);
+                                return;
+                            }
+
+                            String pwd = PreferenceManager.getDefaultSharedPreferences(DataApplication.getInstance()).getString(ConstantSet.KEY_PWD, "");
+                            if (!TextUtils.equals(editText.getText(), pwd)) {
+                                ToastUtil.showToast(R.string.tip_pwd_wrong);
+                                lockSetting(false);
+                                return;
+                            }
+                            unlockSetting();
+                            dialog.dismiss();
+                        })
+                        .setNegativeButton(getString(R.string.dialog_cancel), (dialog, which) -> {
+                            lockSetting(false);
+                            dialog.dismiss();
+                        })
+                        .setCancelable(false)
+                        .create()
+                        .show();
+            } else {
+                lockSetting(true);
+            }
+            return true;
+        });
 
         //输入URL
         mURLPreference.setOnPreferenceChangeListener((preference, newValue) -> {
@@ -177,6 +229,7 @@ public class SettingFragment extends PreferenceFragmentCompat {
         mURLPreference = findPreference("pre_url_address");
         mPWDModifyPreference = findPreference("pre_modify_pwd");
         mClearPreference = findPreference("pre_clear_history");
+        mUnlockPreference = (SwitchPreference) findPreference("pre_unlock");
         mHistoryPreference = (ListPreference) findPreference("pre_url_history");
     }
 
@@ -217,6 +270,20 @@ public class SettingFragment extends PreferenceFragmentCompat {
         mHistoryPreference.setEntryValues(null);
         mHistoryPreference.setEntries(null);
         ToastUtil.showToast("清除成功！");
+    }
+
+    private void lockSetting(boolean showTip) {
+        mUnlockPreference.setChecked(true);
+        mURLPreference.setVisible(false);
+        mPWDModifyPreference.setVisible(false);
+        if(showTip)ToastUtil.showToast(getString(R.string.tip_locked));
+    }
+
+    private void unlockSetting() {
+        mUnlockPreference.setChecked(false);
+        mURLPreference.setVisible(true);
+        mPWDModifyPreference.setVisible(true);
+        ToastUtil.showToast(getString(R.string.tip_unlocked));
     }
 
 }

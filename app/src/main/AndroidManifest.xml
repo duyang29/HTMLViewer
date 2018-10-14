@@ -46,6 +46,7 @@
         </activity>
 
         <activity android:name=".ui.setting.ModifyPWDActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
 

@@ -19,23 +19,37 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/preferences_settings">
 
+    <SwitchPreference
+        android:key="pre_unlock"
+        android:title="@string/unlock_url"
+        android:checked="true"
+        android:disableDependentsState="true"
+        android:summaryOn="@string/tip_unlock"
+        android:summaryOff="@string/tip_lock"/>
+
     <PreferenceCategory
+        android:key="pre_web_set"
         android:title="@string/web_set">
 
         <EditTextPreference
             android:key="pre_url_address"
             android:title="@string/input_url_address"
-            android:summary="http://"/>
+            android:summary="http://"
+            android:dependency="pre_unlock"
+            android:shouldDisableView="true"/>
 
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/system_set">
+        android:key="pre_system_set"
+        android:title="@string/system_set"
+        android:dependency="pre_unlock">
 
         <Preference
             android:key="pre_modify_pwd"
             android:title="@string/modify_pwd"
-            android:summary="******"/>
+            android:summary="******"
+            android:shouldDisableView="true"/>
 
     </PreferenceCategory>
 

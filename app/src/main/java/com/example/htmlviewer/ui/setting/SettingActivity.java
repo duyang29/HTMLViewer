@@ -36,10 +36,6 @@ import com.example.htmlviewer.ui.BaseActivity;
  **/
 public class SettingActivity extends BaseActivity {
 
-    public static final String EXTRA_FLAG= "EXTRA_FLAG";
-
-    public static final int FLAG_SETTINGS = 0, FLAG_ABOUT = 1, FLAG_LICENSES = 2;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +69,7 @@ public class SettingActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            onBackPressed();
+            onBackPressed();//监听ToolBar返回事件
         }
         return true;
     }

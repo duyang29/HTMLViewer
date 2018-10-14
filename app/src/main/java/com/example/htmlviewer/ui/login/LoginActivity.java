@@ -47,18 +47,18 @@ public class LoginActivity extends BaseActivity {
     public void onViewClicked() {
         // TODO: 2018/10/14 验证密码
         if (TextUtils.isEmpty(editAccount.getText())) {
-            showToast("账号不能为空！");
+            showToast(R.string.tip_account_empty);
             return;
         }
 
         if (TextUtils.isEmpty(edtPwd.getText())) {
-            showToast("密码不能为空！");
+            showToast(R.string.tip_pwd_empty);
             return;
         }
 
         String pwd= PreferenceManager.getDefaultSharedPreferences(DataApplication.getInstance()).getString(ConstantSet.KEY_PWD, "");
         if (!TextUtils.equals(edtPwd.getText(), pwd)) {
-            showToast("密码错误!");
+            showToast(R.string.tip_pwd_wrong);
             return;
         }
 

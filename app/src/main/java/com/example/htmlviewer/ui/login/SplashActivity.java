@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.example.htmlviewer.R;
 import com.example.htmlviewer.ui.BaseActivity;
+import com.example.htmlviewer.ui.main.MainActivity;
 import com.example.htmlviewer.util.ISkipActivityUtil;
 import com.example.htmlviewer.util.SystemUtil;
 
@@ -32,7 +33,7 @@ public class SplashActivity extends BaseActivity {
         ButterKnife.bind(this);
         tvAppVersion.setText(String.format("V%s",SystemUtil.getVersionName()));
         new Handler().postDelayed(() -> {
-            ISkipActivityUtil.startIntent(SplashActivity.this, LoginActivity.class);
+            ISkipActivityUtil.startIntent(SplashActivity.this, MainActivity.class);
             finish();
         }, 1200L);
 

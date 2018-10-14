@@ -61,9 +61,6 @@ public class MainActivity extends BaseActivity {
         super.onResume();
         String defaultUrl = PreferenceManager.getDefaultSharedPreferences(DataApplication.getInstance()).getString(ConstantSet.KEY_SET_URL, "");
         if (!TextUtils.isEmpty(defaultUrl) && !TextUtils.equals(defaultUrl, mWebView.getUrl())) {
-//            quitFullScreen();//退出全屏
-//            mLayoutTitle.setVisibility(View.VISIBLE);
-
             mWebView.clearHistory();
             mWebView.loadUrl(defaultUrl);
         }

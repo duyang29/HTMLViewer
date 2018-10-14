@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 
 import com.example.htmlviewer.DataApplication;
@@ -44,7 +45,19 @@ public class ModifyPWDActivity extends BaseActivity {
             }
         }
 
+        initToolbar();
+
         setTitle(R.string.modify_pwd);
+
+    }
+
+    private void initToolbar() {
+        Toolbar toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);//Activity中使用ToolBar替换ActionVar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//设置左返回按钮
+        toolbar.setNavigationOnClickListener(v -> {
+            finish();
+        });
 
     }
 
